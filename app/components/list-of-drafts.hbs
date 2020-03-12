@@ -1,0 +1,49 @@
+<div class="container">
+    <!-- Content here -->
+
+
+    <div class="card" style="width: 325px;">
+
+        <div class="card-body">
+            <div class="card-title">{{this.MyTitle}}
+
+                <div class="pointer" id="downer" {{on "click" ( fn MissionForm  )}}><img class="icon"
+                        src="icons/{{this.missionstateIcon}}" /></div>
+            </div>
+
+
+            <div id="addmission" class="missionState {{this.missionstate}}">
+                <form {{action 'HandleSubmit' on="submit"}}>
+                    {{input  value=newmission}}
+                    <input type="submit" value="{{this.AddMission}}" />
+                </form>
+
+            </div>
+            <hr>
+
+            {{#each this.drafts key="id"  as |draft |}}
+
+            <div class="row">
+                <div class="col">
+
+                    <input type="checkbox" id="mis_{{draft.ID}}" name="mis_{{draft.ID}}" value="mis_{{draft.ID}}"
+                        checked={{ draft.canceled }} disabled={{ draft.canceled }}
+                        {{on "change" (fn this.handlerChecked draft.ID)}} />
+                    <label for="mis_{{draft.ID}}"></label>
+
+                </div>
+                <div class="col"><span class="lt{{draft.canceled}}">{{draft.missionName}}</span></div>
+                <div class="col pointer" {{on "click" (fn this.DeleteMe draft.ID) }}>X</div>
+
+            </div>
+
+            {{/each}}
+
+
+
+        </div>
+
+
+    </div>
+
+</div>
